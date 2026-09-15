@@ -21,10 +21,33 @@ import sys
 from datetime import date
 from pathlib import Path
 
+import requests.sessions
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import tariff  # noqa: E402
+
+# FusionSolar (como muchos sitios grandes) puede bloquear pedidos que se
+# identifiquen como "python-requests/x.x" en vez de un navegador real, algo
+# más probable todavía viniendo de una IP de servidor en la nube (como los
+# de GitHub Actions) en vez de una IP residencial normal. Esto hace que el
+# login devuelva una página de bloqueo en vez de la respuesta JSON esperada.
+# Para evitarlo, hacemos que TODAS las sesiones de "requests" que cree este
+# proceso (incluida la que crea internamente fusion_solar_py) se identifiquen
+# como un navegador Chrome normal.
+_original_default_headers = requests.sessions.default_headers
+
+
+def _navegador_default_headers():
+    headers = _original_default_headers()
+    headers["User-Agent"] = (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+    )
+    return headers
+
+
+requests.sessions.default_headers = _navegador_default_headers
 
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / "config.yaml"
