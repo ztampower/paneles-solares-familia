@@ -1,0 +1,149 @@
+:root {
+  --naranja: #E8A23D;
+  --azul: #3D6FE8;
+  --verde: #2E9E5B;
+  --fondo: #FAFAF8;
+  --texto: #23262B;
+  --texto-suave: #6B7280;
+  --borde: #E7E5E1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+}
+
+.oculto { display: none !important; }
+
+/* --- Pantalla PIN --- */
+.pantalla-pin {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.caja-pin {
+  background: white;
+  border: 1px solid var(--borde);
+  border-radius: 20px;
+  padding: 40px 28px;
+  max-width: 340px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.icono-sol { font-size: 48px; margin-bottom: 8px; }
+
+.caja-pin h1 { font-size: 1.3rem; margin: 0 0 4px; }
+.caja-pin p { color: var(--texto-suave); margin: 0 0 20px; font-size: 0.95rem; }
+
+#input-pin {
+  width: 100%;
+  font-size: 1.6rem;
+  text-align: center;
+  letter-spacing: 6px;
+  padding: 14px;
+  border: 2px solid var(--borde);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+#input-pin:focus { outline: none; border-color: var(--naranja); }
+
+#btn-entrar {
+  width: 100%;
+  padding: 14px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: white;
+  background: var(--naranja);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+#btn-entrar:active { opacity: 0.85; }
+
+.error-pin { color: #D64545; min-height: 20px; font-size: 0.9rem; margin: 10px 0 0; }
+
+/* --- App principal --- */
+.app { max-width: 720px; margin: 0 auto; padding: 24px 16px 60px; }
+
+.encabezado { text-align: center; margin-bottom: 24px; }
+.encabezado h1 { font-size: 1.4rem; margin: 0 0 4px; }
+.fecha-actualizacion { color: var(--texto-suave); font-size: 0.85rem; margin: 0; }
+
+.contenedor-casas { display: flex; flex-direction: column; gap: 20px; }
+.cargando { text-align: center; color: var(--texto-suave); padding: 40px 0; }
+
+.tarjeta-casa {
+  background: white;
+  border: 1px solid var(--borde);
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.tarjeta-casa h2 { margin: 0 0 4px; font-size: 1.15rem; }
+.periodo { color: var(--texto-suave); font-size: 0.85rem; margin: 0 0 18px; }
+
+.metricas-clave {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.metrica {
+  background: #F5F4F1;
+  border-radius: 14px;
+  padding: 14px;
+  text-align: center;
+}
+.metrica .valor { font-size: 1.5rem; font-weight: 700; line-height: 1.15; }
+.metrica .etiqueta { font-size: 0.78rem; color: var(--texto-suave); margin-top: 2px; }
+.metrica.ahorro .valor { color: var(--verde); }
+.metrica.boleta .valor { color: var(--azul); }
+
+.detalle-kwh {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  padding: 12px 0;
+  border-top: 1px dashed var(--borde);
+  border-bottom: 1px dashed var(--borde);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.detalle-kwh div { flex: 1; min-width: 80px; }
+.detalle-kwh .num { font-weight: 600; font-size: 1.05rem; }
+.detalle-kwh .lbl { font-size: 0.72rem; color: var(--texto-suave); }
+
+.proxima-lectura {
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.grafico-contenedor { position: relative; height: 180px; }
+
+.aviso-sin-datos {
+  text-align: center;
+  color: var(--texto-suave);
+  padding: 20px 0;
+  font-size: 0.9rem;
+}
+
+.pie {
+  text-align: center;
+  color: var(--texto-suave);
+  font-size: 0.78rem;
+  margin-top: 28px;
+  padding: 0 12px;
+}

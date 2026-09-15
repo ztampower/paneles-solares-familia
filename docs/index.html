@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Ahorro Paneles Solares</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="pantalla-pin" class="pantalla-pin">
+    <div class="caja-pin">
+      <div class="icono-sol">☀️</div>
+      <h1>Paneles Solares</h1>
+      <p>Ingresa el código para ver el ahorro</p>
+      <input type="tel" inputmode="numeric" id="input-pin" placeholder="••••" maxlength="12" autofocus>
+      <button id="btn-entrar">Entrar</button>
+      <p id="error-pin" class="error-pin"></p>
+    </div>
+  </div>
+
+  <div id="app" class="app oculto">
+    <header class="encabezado">
+      <h1>☀️ Ahorro Paneles Solares</h1>
+      <p class="fecha-actualizacion" id="fecha-actualizacion"></p>
+    </header>
+
+    <main id="contenedor-casas" class="contenedor-casas">
+      <!-- Las tarjetas de cada casa se generan con JavaScript -->
+      <p class="cargando">Cargando datos…</p>
+    </main>
+
+    <footer class="pie">
+      <p>Los montos son una <strong>estimación</strong> a partir de la generación registrada y la tarifa configurada. Puede haber pequeñas diferencias con la boleta real.</p>
+    </footer>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

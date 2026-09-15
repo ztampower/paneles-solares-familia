@@ -1,0 +1,45 @@
+name: Actualizar datos de paneles solares
+
+on:
+  schedule:
+    # 23:30 UTC = 20:30 en Chile (UTC-3, sin horario de verano). Ajusta la
+    # hora si quieres que corra en otro momento del día.
+    - cron: "30 23 * * *"
+  workflow_dispatch: {}   # permite correrlo manualmente desde la pestaña "Actions"
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install -r scripts/requirements.txt
+
+      - name: Obtener datos de FusionSolar y calcular ahorro/boleta
+        env:
+          CASA_USUARIO: ${{ secrets.CASA_USUARIO }}
+          CASA_PASSWORD: ${{ secrets.CASA_PASSWORD }}
+          CASA_SUBDOMAIN: ${{ secrets.CASA_SUBDOMAIN }}
+          PADRES_USUARIO: ${{ secrets.PADRES_USUARIO }}
+          PADRES_PASSWORD: ${{ secrets.PADRES_PASSWORD }}
+          PADRES_SUBDOMAIN: ${{ secrets.PADRES_SUBDOMAIN }}
+          SITE_PIN: ${{ secrets.SITE_PIN }}
+        run: python scripts/fetch_daily.py
+
+      - name: Guardar cambios en el repositorio
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/historial.json docs/data/resumen.json docs/data/auth.json
+          git diff --quiet --cached || git commit -m "Actualizar datos de paneles solares $(date +'%Y-%m-%d')"
+          git push

@@ -1,0 +1,52 @@
+# Configuración de tarifas eléctricas y ciclo de lectura de cada casa.
+# Este archivo NO contiene contraseñas, por lo tanto es seguro subirlo a GitHub.
+#
+# precio_energia_kwh:     precio por kWh de "Electricidad Consumida" (antes de IVA).
+# precio_transporte_kwh:  precio por kWh de "Transporte de electricidad" (antes de IVA).
+#                          Enel (y la mayoría de distribuidoras) separan estos dos cargos
+#                          en la boleta; súmalos si tu distribuidora los muestra juntos.
+# precio_inyeccion_kwh:   lo que te reconocen por cada kWh inyectado a la red (antes de IVA).
+#                          Aparece en tu boleta como "Energía Inyectada" o en el anexo de
+#                          Ley 20.571/21.118 como "Valor Neto" de las inyecciones.
+# cargo_fijo_mensual:     suma de cargos fijos AFECTOS a IVA (administración del servicio +
+#                          arriendo medidor + cargo fondo de estabilización, etc.)
+# otros_cargos_fijos:     cargos fijos que aparecen aparte, NO afectos a IVA en el total
+#                          (ej. "Servicio Común" de un edificio/condominio). Dejar en 0 si
+#                          no aplica en tu boleta.
+# iva:                    tasa de IVA (0.19 en Chile).
+# dia_lectura_medidor:    día del mes de la lectura (según "Fecha estimada próxima lectura").
+#
+# Ambas cuentas ya están completadas con boletas reales de Enel (misma
+# distribuidora y tipo de tarifa BT1-T6 en las dos, ambas a nombre de tu
+# papá):
+#   - "casa"   = donde vives tú (Ñuñoa, boleta cliente Ricardo San Martín,
+#                periodo 24/07/2026-24/08/2026).
+#   - "padres" = donde viven ellos (La Florida, boleta a nombre de
+#                Inmobiliaria Cumbre de Macul Ltda., periodo
+#                16/07/2026-17/08/2026).
+# Los precios por kWh son parecidos entre ambas (misma distribuidora/tarifa)
+# pero no idénticos, y los cargos fijos sí difieren (la de Ñuñoa tiene un
+# cargo de "Servicio Común" de edificio que la de La Florida no tiene).
+
+cuentas:
+  casa:
+    nombre: "Casa Ariel (Ñuñoa)"
+    tarifa:
+      precio_energia_kwh: 190.98
+      precio_transporte_kwh: 18.07
+      precio_inyeccion_kwh: 110.46
+      cargo_fijo_mensual: 1372     # administración (611) + arriendo medidor (378) + fondo estabilización (383)
+      otros_cargos_fijos: 2617     # "Servicio Común" del edificio (ajusta si cambia)
+      iva: 0.19
+      dia_lectura_medidor: 24
+
+  padres:
+    nombre: "Casa Padres (La Florida)"
+    tarifa:
+      precio_energia_kwh: 186.14
+      precio_transporte_kwh: 18.08
+      precio_inyeccion_kwh: 105.70
+      cargo_fijo_mensual: 995      # administración (611) + arriendo medidor (384)
+      otros_cargos_fijos: 0        # esta boleta no tiene cargos adicionales de comunidad
+      iva: 0.19
+      dia_lectura_medidor: 16      # periodo de lectura fue 16/07-17/08, próxima estimada 15/09 (varía +-1 día)
